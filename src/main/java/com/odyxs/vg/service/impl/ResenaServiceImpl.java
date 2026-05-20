@@ -1,40 +1,40 @@
-package com.odyxs.vg.Services;
+package com.odyxs.vg.service.impl;
+
+import com.odyxs.vg.model.Lugar;
+import com.odyxs.vg.model.Resena;
+import com.odyxs.vg.model.Usuario;
+import com.odyxs.vg.repository.LugarRepository;
+import com.odyxs.vg.repository.ResenaRepository;
+import com.odyxs.vg.repository.UsuarioRepository;
+import com.odyxs.vg.service.ResenaService;
+import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
 import java.util.List;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-
-import com.odyxs.vg.Entity.Lugar;
-import com.odyxs.vg.Entity.Resenas;
-import com.odyxs.vg.Entity.Usuario;
-import com.odyxs.vg.Repository.LugarRepository;
-import com.odyxs.vg.Repository.ResenaRepository;
-import com.odyxs.vg.Repository.UsuarioRepository;
-
 @Service
-public class ResenaService {
+public class ResenaServiceImpl implements ResenaService {
 
-    @Autowired
-    private ResenaRepository resenaRepository;
+    private final ResenaRepository resenaRepository;
+    private final LugarRepository lugarRepository;
+    private final UsuarioRepository usuarioRepository;
 
-    @Autowired
-    private LugarRepository lugarRepository;
+    public ResenaServiceImpl(ResenaRepository resenaRepository,
+                             LugarRepository lugarRepository,
+                             UsuarioRepository usuarioRepository) {
+        this.resenaRepository = resenaRepository;
+        this.lugarRepository = lugarRepository;
+        this.usuarioRepository = usuarioRepository;
+    }
 
-    @Autowired
-    private UsuarioRepository usuarioRepository;
-
+    @Override
     public String guardar(Long lugarId, Long usuarioId, String comentario, Integer calificacion) {
         Lugar lugar = lugarRepository.findById(lugarId).orElse(null);
         Usuario usuario = usuarioRepository.findById(usuarioId).orElse(null);
-        if (lugar == null || usuario == null) {
-            return "Lugar o usuario no encontrado.";
-        }
-        if (calificacion < 1 || calificacion > 5) {
-            return "La calificación debe estar entre 1 y 5.";
-        }
-        Resenas resena = new Resenas();
+        if (lugar == null || usuario == null) return "Lugar o usuario no encontrado.";
+        if (calificacion < 1 || calificacion > 5) return "La calificación debe estar entre 1 y 5.";
+
+        Resena resena = new Resena();
         resena.setLugar(lugar);
         resena.setUsuario(usuario);
         resena.setComentario(comentario);
@@ -44,8 +44,9 @@ public class ResenaService {
         return "Reseña guardada.";
     }
 
+    @Override
     public String editar(Long resenaId, Long usuarioId, String comentario, Integer calificacion) {
-        Resenas resena = resenaRepository.findById(resenaId).orElse(null);
+        Resena resena = resenaRepository.findById(resenaId).orElse(null);
         if (resena == null) return "Reseña no encontrada.";
         if (!resena.getUsuario().getId().equals(usuarioId)) return "No tienes permiso para editar esta reseña.";
         if (calificacion < 1 || calificacion > 5) return "La calificación debe estar entre 1 y 5.";
@@ -55,19 +56,22 @@ public class ResenaService {
         return "Reseña actualizada.";
     }
 
+    @Override
     public String eliminar(Long resenaId, Long usuarioId) {
-        Resenas resena = resenaRepository.findById(resenaId).orElse(null);
+        Resena resena = resenaRepository.findById(resenaId).orElse(null);
         if (resena == null) return "Reseña no encontrada.";
         if (!resena.getUsuario().getId().equals(usuarioId)) return "No tienes permiso para eliminar esta reseña.";
         resenaRepository.deleteById(resenaId);
         return "Reseña eliminada.";
     }
 
-    public List<Resenas> obtenerPorLugar(Long lugarId) {
+    @Override
+    public List<Resena> obtenerPorLugar(Long lugarId) {
         return resenaRepository.findByLugarId(lugarId);
     }
 
-    public Resenas obtenerPorId(Long id) {
+    @Override
+    public Resena obtenerPorId(Long id) {
         return resenaRepository.findById(id).orElse(null);
     }
 }
