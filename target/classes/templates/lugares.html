@@ -35,9 +35,8 @@
     <!-- Filtros -->
     <div class="d-flex flex-wrap gap-2 justify-content-center mb-5">
         <a href="/lugares?categoriaId=0" class="btn rounded-pill px-4 py-2"
-           th:classappend="${categoriaId == null or categoriaId == 0} ? ' btn-primary' : ' btn-outline-primary'">
-            🌟 Todos
-        </a>
+           th:classappend="${categoriaId == null or categoriaId == 0} ? ' btn-primary' : ' btn-outline-primary'"
+           th:text="#{lugares.todos}">🌟 Todos</a>
         <a th:each="cat : ${categorias}"
            th:href="@{/lugares(categoriaId=${cat.id})}"
            th:text="${cat.nombre}"
@@ -65,7 +64,7 @@
                         <span th:text="${lugar.ubicacion}">Ubicación</span>
                     </p>
                     <p class="small text-muted mb-2" th:text="${#strings.abbreviate(lugar.descripcion, 90)}">Descripción</p>
-                    <span class="lct-ver-mas">Ver detalles <i class="fa fa-arrow-right ms-1"></i></span>
+                    <span class="lct-ver-mas" th:text="#{lugares.verDetalles}">Ver detalles</span>
                 </div>
             </a>
         </div>
@@ -74,17 +73,17 @@
     <!-- Estado vacío -->
     <div class="text-center py-5" th:if="${#lists.isEmpty(lugares)}">
         <div style="font-size:4rem; margin-bottom:16px;">🗺️</div>
-        <h4 style="color:var(--azul); font-family:'Cormorant Garamond',serif;">No hay lugares en esta categoría</h4>
-        <p class="text-muted mb-4">Puedes proponer un lugar nuevo o explorar otras categorías</p>
-        <a href="/lugares?categoriaId=0" class="btn btn-primary rounded-pill me-2 px-5">Ver todos</a>
-        <a href="/proponer-lugar" class="btn btn-outline-primary rounded-pill px-5">➕ Proponer lugar</a>
+        <h4 style="color:var(--azul); font-family:'Cormorant Garamond',serif;" th:text="#{lugares.empty.title}">No hay lugares en esta categoría</h4>
+        <p class="text-muted mb-4" th:text="#{lugares.empty.desc}">Puedes proponer un lugar nuevo o explorar otras categorías</p>
+        <a href="/lugares?categoriaId=0" class="btn btn-primary rounded-pill me-2 px-5" th:text="#{lugares.empty.verTodos}">Ver todos</a>
+        <a href="/proponer-lugar" class="btn btn-outline-primary rounded-pill px-5" th:text="#{lugares.cta.btn}">➕ Proponer lugar</a>
     </div>
 </div>
 
 
 <div class="text-center mt-5 p-4 rounded-3" style="background:var(--cream); border:1px dashed rgba(200,150,62,.4);">
-    <p class="text-muted mb-3">¿Tienes algun lugar interesante? Puedes compartirlo en ODYXS.</p>
-    <a href="/proponer-lugar" class="btn btn-primary rounded-pill px-5">➕ Proponer lugar</a>
+    <p class="text-muted mb-3" th:text="#{lugares.cta.desc}">¿Tienes algún lugar interesante? Puedes compartirlo en ODYXS.</p>
+    <a href="/proponer-lugar" class="btn btn-primary rounded-pill px-5" th:text="#{lugares.cta.btn}">➕ Proponer lugar</a>
 </div>
 
 

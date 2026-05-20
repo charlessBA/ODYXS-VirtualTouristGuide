@@ -7,11 +7,11 @@
         <div class="col-lg-7 text-start">
             <div class="d-inline-flex align-items-center" style="height:44px; gap:8px;">
                 <span class="text-white-50 small">
-                    <i class="fa fa-map-marker-alt me-1" style="color:var(--gold);"></i>Cartagena de Indias, Colombia
+                    <i class="fa fa-map-marker-alt me-1" style="color:var(--gold);"></i><span th:text="#{topbar.location}">Cartagena de Indias, Colombia</span>
                 </span>
                 <span class="text-white-50 mx-2">|</span>
                 <span class="text-white-50 small">
-                    <i class="fa fa-star me-1" style="color:var(--gold);"></i>Patrimonio UNESCO 1984
+                    <i class="fa fa-star me-1" style="color:var(--gold);"></i><span th:text="#{topbar.unesco}">Patrimonio UNESCO 1984</span>
                 </span>
             </div>
         </div>
@@ -74,7 +74,7 @@
                 </a>
                 <a href="/logout" class="btn btn-outline-danger rounded-pill py-2 px-3 ms-2"
                    title="Cerrar sesión" style="font-size:.85rem;">
-                    <i class="fa fa-sign-out-alt me-1"></i>Salir
+                    <i class="fa fa-sign-out-alt me-1"></i><span th:text="#{nav.salir}">Salir</span>
                 </a>
             </th:block>
             <th:block th:if="${session.usuarioId == null}">
@@ -405,9 +405,9 @@
                         border:2px solid rgba(255,193,7,.4);display:flex;align-items:center;
                         justify-content:center;font-size:1.3rem;flex-shrink:0;">🤖</div>
             <div style="flex:1;">
-                <div style="font-family:'Jost',sans-serif;font-weight:700;color:#fff;font-size:.9rem;">ODYX — Guía de Cartagena</div>
+                <div style="font-family:'Jost',sans-serif;font-weight:700;color:#fff;font-size:.9rem;" th:text="#{chatbot.title}">ODYX — Guía de Cartagena</div>
                 <div style="color:rgba(255,255,255,.6);font-size:.72rem;">
-                    <span style="color:#2ecc71;margin-right:4px;">●</span>Online 24/7</div>
+                    <span style="color:#2ecc71;margin-right:4px;">●</span><span th:text="#{chatbot.subtitle}">Online 24/7</span></div>
             </div>
             <button onclick="toggleChat()" style="background:rgba(255,255,255,.15);border:none;color:#fff;
                     width:26px;height:26px;border-radius:50%;cursor:pointer;font-size:.8rem;
@@ -416,14 +416,20 @@
         <div id="chatMessages" style="height:280px;overflow-y:auto;padding:14px;
              display:flex;flex-direction:column;gap:10px;background:#f7f9ff;scroll-behavior:smooth;"></div>
         <div style="padding:8px 10px;background:#fff;border-top:1px solid #eef2ff;display:flex;gap:5px;flex-wrap:wrap;">
-            <button class="chat-sug-pop" onclick="chatEnviar(this.dataset.msg)" data-msg="¿Cuál es el clima en Cartagena?">🌤️ Clima</button>
-            <button class="chat-sug-pop" onclick="chatEnviar(this.dataset.msg)" data-msg="¿Cuáles son las mejores playas?">🏖️ Playas</button>
-            <button class="chat-sug-pop" onclick="chatEnviar(this.dataset.msg)" data-msg="¿Cómo me muevo en Cartagena?">🚌 Transporte</button>
-            <button class="chat-sug-pop" onclick="chatEnviar(this.dataset.msg)" data-msg="¿Qué hoteles recomiendas?">🏨 Hoteles</button>
-            <button class="chat-sug-pop" onclick="chatEnviar(this.dataset.msg)" data-msg="¿Qué actividades hay?">🎯 Actividades</button>
+            <button class="chat-sug-pop" onclick="chatEnviar(this.dataset.msg)"
+                    th:data-msg="#{chatbot.sug.clima}"    th:text="#{chatbot.sug.clima}">🌤️ Clima</button>
+            <button class="chat-sug-pop" onclick="chatEnviar(this.dataset.msg)"
+                    th:data-msg="#{chatbot.sug.playas}"   th:text="#{chatbot.sug.playas}">🏖️ Playas</button>
+            <button class="chat-sug-pop" onclick="chatEnviar(this.dataset.msg)"
+                    th:data-msg="#{chatbot.sug.transporte}" th:text="#{chatbot.sug.transporte}">🚌 Transporte</button>
+            <button class="chat-sug-pop" onclick="chatEnviar(this.dataset.msg)"
+                    th:data-msg="#{chatbot.sug.hoteles}"  th:text="#{chatbot.sug.hoteles}">🏨 Hoteles</button>
+            <button class="chat-sug-pop" onclick="chatEnviar(this.dataset.msg)"
+                    th:data-msg="#{chatbot.sug.actividades}" th:text="#{chatbot.sug.actividades}">🎯 Actividades</button>
         </div>
         <div style="display:flex;gap:8px;padding:10px;background:#fff;border-top:1px solid #eef2ff;">
-            <input id="chatInputPop" type="text" placeholder="Escribe tu pregunta sobre Cartagena..."
+            <input id="chatInputPop" type="text"
+                   th:placeholder="#{chatbot.placeholder}" placeholder="Escribe tu pregunta sobre Cartagena..."
                    onkeydown="if(event.key==='Enter')chatEnviarInput()"
                    style="flex:1;border:1.5px solid #dce5ff;border-radius:40px;padding:9px 15px;
                           font-size:.87rem;outline:none;font-family:'Roboto',sans-serif;color:var(--azul);">
@@ -443,7 +449,9 @@
         .chat-sug-pop:hover{background:var(--azul);color:#fff;}
         #chatFab:hover{transform:scale(1.08);}
     </style>
-    <script>
+    <script th:inline="javascript">
+    var CHAT_WELCOME = /*[[#{chatbot.welcome}]]*/ '¡Hola! 👋 Soy ODYX.';
+    var CHAT_ERROR   = /*[[#{chatbot.error}]]*/   'Lo siento, hubo un error. Inténtalo de nuevo 🙏';
     var chatOpen=false;
     function toggleChat(){
         var p=document.getElementById('chatPopup');
@@ -458,7 +466,7 @@
         if(b)b.style.display='none';
         var msgs=document.getElementById('chatMessages');
         if(chatOpen&&msgs.children.length===0){
-            addBotMsg('¡Hola! 👋 Soy ODYX, tu guía inteligente de Cartagena de Indias. ¿En qué te ayudo?');
+            addBotMsg(CHAT_WELCOME);
         }
         if(chatOpen)setTimeout(function(){document.getElementById('chatInputPop').focus();},200);
     }
@@ -496,7 +504,7 @@
             addBotMsg(data.respuesta);
         }catch(e){
             var t=document.getElementById('chatTypingDot');if(t)t.remove();
-            addBotMsg('Lo siento, hubo un error. Inténtalo de nuevo 🙏');
+            addBotMsg(CHAT_ERROR);
         }
     }
     function chatEnviarInput(){chatEnviar(document.getElementById('chatInputPop').value);}

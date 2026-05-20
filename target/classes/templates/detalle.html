@@ -49,7 +49,7 @@
             <i class="fa fa-map-marker-alt me-2" style="color:var(--gold);"></i>
             <span th:text="${lugar.ubicacion}">Ubicación</span>
             <span class="ms-3" th:if="${lugar.esOficial}">
-                <i class="fa fa-check-circle me-1" style="color:var(--gold);"></i>Verificado por ODYXS
+                <i class="fa fa-check-circle me-1" style="color:var(--gold);"></i><span th:text="#{detalle.verificado}">Verificado por ODYXS</span>
             </span>
         </p>
     </div>
@@ -64,7 +64,7 @@
             <!-- Descripción -->
             <div class="p-4 rounded-3 mb-4" style="background:var(--cream); border-left:4px solid var(--gold);">
                 <h4 class="fw-bold mb-3" style="color:var(--azul); font-family:'Cormorant Garamond',serif; font-size:1.5rem;">
-                    <i class="fa fa-info-circle me-2" style="color:var(--gold);"></i>Sobre este lugar
+                    <i class="fa fa-info-circle me-2" style="color:var(--gold);"></i><span th:text="#{detalle.sobre}">Sobre este lugar</span>
                 </h4>
                 <p class="text-muted lh-lg mb-0" style="font-size:1.02rem;" th:text="${lugar.descripcion}">Descripción</p>
             </div>
@@ -72,10 +72,10 @@
             <!-- Botones de acción -->
             <div class="d-flex flex-wrap gap-2 mb-5" th:if="${lugar.urlMapa != null}">
                 <a th:href="${lugar.urlMapa}" target="_blank" class="btn btn-primary rounded-pill px-4 py-2">
-                    <i class="fa fa-map-marker-alt me-2"></i>Ver en Google Maps
+                    <i class="fa fa-map-marker-alt me-2"></i><span th:text="#{detalle.verMapa}">Ver en Google Maps</span>
                 </a>
                 <a href="/mapa" class="btn btn-outline-primary rounded-pill px-4 py-2">
-                    <i class="fa fa-globe me-2"></i>Mapa interactivo ODYXS
+                    <i class="fa fa-globe me-2"></i><span th:text="#{detalle.mapaOdyxs}">Mapa interactivo ODYXS</span>
                 </a>
             </div>
 
@@ -83,7 +83,7 @@
             <div>
                 <div class="d-flex align-items-center justify-content-between mb-4">
                     <h4 class="fw-bold mb-0" style="color:var(--azul); font-family:'Cormorant Garamond',serif; font-size:1.5rem;">
-                        <i class="fa fa-comments me-2" style="color:var(--gold);"></i>Reseñas de viajeros
+                        <i class="fa fa-comments me-2" style="color:var(--gold);"></i><span th:text="#{detalle.resenas}">Reseñas de viajeros</span>
                     </h4>
                     <span class="badge rounded-pill px-3 py-2" style="background:var(--azul); color:#fff; font-size:.82rem;"
                           th:text="${#lists.size(resenas) + ' reseñas'}">0 reseñas</span>
@@ -111,16 +111,16 @@
 
                 <div class="text-center py-4" th:if="${#lists.isEmpty(resenas)}">
                     <div style="font-size:2.5rem; margin-bottom:8px;">💬</div>
-                    <p class="text-muted">Aún no hay reseñas. ¡Sé el primero en comentar!</p>
+                    <p class="text-muted" th:text="#{detalle.resenas.sinResenas}">Aún no hay reseñas. ¡Sé el primero en comentar!</p>
                 </div>
 
                 <!-- Formulario -->
                 <div class="p-4 rounded-3 mt-4" style="background:var(--cream); border:1px solid rgba(200,150,62,.2);">
-                    <h5 class="fw-bold mb-4" style="color:var(--azul); font-family:'Cormorant Garamond',serif;">Escribe tu reseña</h5>
+                    <h5 class="fw-bold mb-4" style="color:var(--azul); font-family:'Cormorant Garamond',serif;" th:text="#{detalle.resenas.escribir}">Escribe tu reseña</h5>
                     <form action="/resenas" method="post">
                         <input type="hidden" name="lugarId" th:value="${lugar.id}">
                         <div class="mb-3">
-                            <label class="form-label fw-semibold" style="color:var(--azul);">Calificación</label>
+                            <label class="form-label fw-semibold" style="color:var(--azul);" th:text="#{detalle.resenas.calificacion}">Calificación</label>
                             <div class="resena-star-input">
                                 <input type="radio" name="calificacion" id="s5" value="5" checked>
                                 <label for="s5"><i class="fas fa-star"></i></label>
@@ -135,13 +135,13 @@
                             </div>
                         </div>
                         <div class="mb-3">
-                            <label class="form-label fw-semibold" style="color:var(--azul);">Comentario</label>
+                            <label class="form-label fw-semibold" style="color:var(--azul);" th:text="#{detalle.resenas.comentario}">Comentario</label>
                             <textarea name="comentario" class="form-control" rows="3"
-                                      placeholder="Comparte tu experiencia en este lugar..." required
+                                      th:placeholder="#{detalle.resenas.placeholder}" placeholder="Comparte tu experiencia en este lugar..." required
                                       style="border-color:rgba(11,45,107,.2); border-radius:12px;"></textarea>
                         </div>
                         <button type="submit" class="btn btn-primary rounded-pill px-5">
-                            <i class="fa fa-paper-plane me-2"></i>Publicar reseña
+                            <i class="fa fa-paper-plane me-2"></i><span th:text="#{detalle.resenas.publicar}">Publicar reseña</span>
                         </button>
                     </form>
                 </div>
@@ -152,22 +152,22 @@
         <div class="col-lg-4">
             <div class="info-sidebar-card">
                 <h5 class="fw-bold mb-4" style="color:var(--azul); font-family:'Cormorant Garamond',serif; font-size:1.2rem; border-bottom:2px solid var(--gold-pale); padding-bottom:12px;">
-                    📍 Información del lugar
+                    📍 <span th:text="#{detalle.info.title}">Información del lugar</span>
                 </h5>
                 <div class="info-row">
                     <div class="info-icon-sm"><i class="fa fa-tag"></i></div>
-                    <div><strong class="d-block small" style="color:var(--azul);">Categoría</strong>
+                    <div><strong class="d-block small" style="color:var(--azul);" th:text="#{detalle.info.categoria}">Categoría</strong>
                         <span class="text-muted small" th:text="${lugar.categoria.nombre}">Cat</span></div>
                 </div>
                 <div class="info-row">
                     <div class="info-icon-sm"><i class="fa fa-map-marker-alt"></i></div>
-                    <div><strong class="d-block small" style="color:var(--azul);">Ubicación</strong>
+                    <div><strong class="d-block small" style="color:var(--azul);" th:text="#{detalle.info.ubicacion}">Ubicación</strong>
                         <span class="text-muted small" th:text="${lugar.ubicacion}">Ubicación</span></div>
                 </div>
                 <div class="info-row" th:if="${lugar.esOficial}">
                     <div class="info-icon-sm"><i class="fa fa-check-circle"></i></div>
-                    <div><strong class="d-block small" style="color:var(--azul);">Estado</strong>
-                        <span class="text-muted small">Verificado por ODYXS ✓</span></div>
+                    <div><strong class="d-block small" style="color:var(--azul);" th:text="#{detalle.info.estado}">Estado</strong>
+                        <span class="text-muted small" th:text="#{detalle.verificado} + ' ✓'">Verificado por ODYXS ✓</span></div>
                 </div>
         </div>
 
