@@ -1,12 +1,14 @@
 package com.odyxs.vg;
+
+import com.odyxs.vg.service.UsuarioService;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
-import com.odyxs.vg.Services.UsuarioService;
 
 @SpringBootApplication
 public class OdyxsApplication {
+
     public static void main(String[] args) {
         SpringApplication.run(OdyxsApplication.class, args);
     }

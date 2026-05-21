@@ -1,22 +1,24 @@
-package com.odyxs.vg.Services;
+package com.odyxs.vg.service.impl;
 
-import org.springframework.beans.factory.annotation.Autowired;
+import com.odyxs.vg.model.Usuario;
+import com.odyxs.vg.repository.UsuarioRepository;
+import com.odyxs.vg.service.UsuarioService;
 import org.springframework.stereotype.Service;
-import com.odyxs.vg.Entity.Usuario;
-import com.odyxs.vg.Repository.UsuarioRepository;
 
 @Service
-public class UsuarioService {
+public class UsuarioServiceImpl implements UsuarioService {
 
-    @Autowired private UsuarioRepository usuarioRepository;
+    private final UsuarioRepository usuarioRepository;
 
-    /** Registra un usuario normal. El correo admin@odyxs.com está reservado. */
+    public UsuarioServiceImpl(UsuarioRepository usuarioRepository) {
+        this.usuarioRepository = usuarioRepository;
+    }
+
+    @Override
     public String registrar(String nombre, String correo, String contrasena,
                             String country, String fechaNacimiento) {
-        if ("admin@odyxs.com".equalsIgnoreCase(correo))
-            return "Este correo está reservado.";
-        if (usuarioRepository.existsByCorreo(correo))
-            return "El correo ya está registrado.";
+        if ("admin@odyxs.com".equalsIgnoreCase(correo)) return "Este correo está reservado.";
+        if (usuarioRepository.existsByCorreo(correo)) return "El correo ya está registrado.";
         Usuario u = new Usuario();
         u.setNombre(nombre);
         u.setCorreo(correo);
@@ -28,13 +30,14 @@ public class UsuarioService {
         return "Registro exitoso.";
     }
 
+    @Override
     public Usuario login(String correo, String contrasena) {
         return usuarioRepository.findByCorreo(correo)
             .filter(u -> u.getContrasena().equals(contrasena))
             .orElse(null);
     }
 
-    /** Inicializa el administrador único al arrancar la app. */
+    @Override
     public void inicializarAdmin() {
         if (!usuarioRepository.existsByCorreo("admin@odyxs.com")) {
             Usuario a = new Usuario();

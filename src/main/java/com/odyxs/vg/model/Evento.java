@@ -1,4 +1,4 @@
-package com.odyxs.vg.Entity;
+package com.odyxs.vg.model;
 
 import jakarta.persistence.*;
 import java.time.LocalDate;
