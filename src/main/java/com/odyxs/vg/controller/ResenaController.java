@@ -1,4 +1,4 @@
-package com.odyxs.vg.Controller;
+package com.odyxs.vg.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -6,8 +6,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import com.odyxs.vg.Entity.Resenas;
-import com.odyxs.vg.Services.ResenaService;
+import com.odyxs.vg.model.Resena;
+import com.odyxs.vg.service.ResenaService;
 
 import jakarta.servlet.http.HttpSession;
 
@@ -35,7 +35,7 @@ public class ResenaController {
                                HttpSession session) {
         if (session.getAttribute("usuarioId") == null) return "redirect:/login";
         Long usuarioId = (Long) session.getAttribute("usuarioId");
-        Resenas resena = resenaService.obtenerPorId(id);
+        Resena resena = resenaService.obtenerPorId(id);
         if (resena == null) return "redirect:/menu";
         Long lugarId = resena.getLugar().getId();
         resenaService.editar(id, usuarioId, comentario, calificacion);
@@ -46,7 +46,7 @@ public class ResenaController {
     public String eliminarResena(@PathVariable Long id, HttpSession session) {
         if (session.getAttribute("usuarioId") == null) return "redirect:/login";
         Long usuarioId = (Long) session.getAttribute("usuarioId");
-        Resenas resena = resenaService.obtenerPorId(id);
+        Resena resena = resenaService.obtenerPorId(id);
         if (resena == null) return "redirect:/menu";
         Long lugarId = resena.getLugar().getId();
         resenaService.eliminar(id, usuarioId);

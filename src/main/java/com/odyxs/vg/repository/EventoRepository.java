@@ -1,5 +1,5 @@
-package com.odyxs.vg.Repository;
-import com.odyxs.vg.Entity.Evento;
+package com.odyxs.vg.repository;
+import com.odyxs.vg.model.Evento;
 import org.springframework.data.jpa.repository.JpaRepository;
 import java.time.LocalDate;
 import java.util.List;

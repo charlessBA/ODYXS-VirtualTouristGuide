@@ -1,6 +1,6 @@
-package com.odyxs.vg.Repository;
+package com.odyxs.vg.repository;
 
-import com.odyxs.vg.Entity.Actividad;
+import com.odyxs.vg.model.Actividad;
 import org.springframework.data.jpa.repository.JpaRepository;
 import java.util.List;
 

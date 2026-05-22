@@ -1,4 +1,4 @@
-package com.odyxs.vg.Controller;
+package com.odyxs.vg.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -7,8 +7,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import com.odyxs.vg.Entity.Usuario;
-import com.odyxs.vg.Services.UsuarioService;
+import com.odyxs.vg.model.Usuario;
+import com.odyxs.vg.service.UsuarioService;
 
 import jakarta.servlet.http.HttpSession;
 
