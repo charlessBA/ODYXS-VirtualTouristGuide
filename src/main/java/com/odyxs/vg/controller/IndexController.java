@@ -1,8 +1,8 @@
-package com.odyxs.vg.Controller;
+package com.odyxs.vg.controller;
 
-import com.odyxs.vg.Repository.EventoRepository;
-import com.odyxs.vg.Services.CategoriaService;
-import com.odyxs.vg.Services.LugarService;
+import com.odyxs.vg.repository.EventoRepository;
+import com.odyxs.vg.service.CategoriaService;
+import com.odyxs.vg.service.LugarService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;

@@ -1,7 +1,7 @@
-package com.odyxs.vg.Controller;
+package com.odyxs.vg.controller;
 
-import com.odyxs.vg.Entity.Actividad;
-import com.odyxs.vg.Services.ActividadService;
+import com.odyxs.vg.model.Actividad;
+import com.odyxs.vg.service.ActividadService;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;

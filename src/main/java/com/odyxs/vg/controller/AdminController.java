@@ -1,14 +1,14 @@
-package com.odyxs.vg.Controller;
+package com.odyxs.vg.controller;
 
-import com.odyxs.vg.Entity.Evento;
-import com.odyxs.vg.Entity.Lugar;
-import com.odyxs.vg.Entity.Categoria;
-import com.odyxs.vg.Repository.EventoRepository;
-import com.odyxs.vg.Repository.CategoriaRepository;
-import com.odyxs.vg.Repository.LugarRepository;
-import com.odyxs.vg.Services.ActividadService;
-import com.odyxs.vg.Services.CategoriaService;
-import com.odyxs.vg.Services.LugarService;
+import com.odyxs.vg.model.Evento;
+import com.odyxs.vg.model.Lugar;
+import com.odyxs.vg.model.Categoria;
+import com.odyxs.vg.repository.EventoRepository;
+import com.odyxs.vg.repository.CategoriaRepository;
+import com.odyxs.vg.repository.LugarRepository;
+import com.odyxs.vg.service.ActividadService;
+import com.odyxs.vg.service.CategoriaService;
+import com.odyxs.vg.service.LugarService;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;

@@ -1,7 +1,7 @@
-package com.odyxs.vg.Controller;
+package com.odyxs.vg.controller;
 
-import com.odyxs.vg.Entity.*;
-import com.odyxs.vg.Services.*;
+import com.odyxs.vg.model.*;
+import com.odyxs.vg.service.*;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;

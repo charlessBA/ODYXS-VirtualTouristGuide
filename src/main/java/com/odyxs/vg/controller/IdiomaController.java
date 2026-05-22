@@ -1,4 +1,4 @@
-package com.odyxs.vg.Controller;
+package com.odyxs.vg.controller;
 
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
